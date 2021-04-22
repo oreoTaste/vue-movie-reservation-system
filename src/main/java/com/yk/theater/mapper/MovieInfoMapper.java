@@ -8,15 +8,16 @@ import java.util.List;
 
 @Mapper
 public interface MovieInfoMapper {
-    @Select("SELECT SCHEDULE_ID as scheduleId" +
-                    ", ROOM_NO as roomNo" +
-                    ", MOVIE_NAME as movieName" +
-                    ", MOVIE_TIME as movieTime" +
-                    ", price" +
-                    ", SEAT_ROW as seatRow" +
-                    ", SEAT_COLUMN as seatColumn" +
-                    " FROM SCHEDULE")
+    @Select("SELECT" +
+            "   *" +
+            " FROM" +
+            " movieInfo")
     List<MovieInfo> getAllMovieInfos();
 
 
+    @Select("SELECT" +
+            " *" +
+            " FROM movieInfo" +
+            " WHERE scheduleId = #{movieId}")
+    MovieInfo findMovie(Long movieId);
 }

@@ -11,7 +11,7 @@ public class MovieInfo {
     private String movieName;
     private String movieTime;
     private int price;
-    private int seatRow;
-    private int seatColumn;
+    private int totalSeats;
+    private int reservedSeats;
 
 }
