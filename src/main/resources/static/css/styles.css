@@ -1,0 +1,9 @@
+/* 개별 화면 css */
+@import "index.css";
+
+:root {
+
+}
+* {
+    box-sizing: content-box;
+}
