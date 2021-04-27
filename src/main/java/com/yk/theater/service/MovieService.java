@@ -23,7 +23,7 @@ public class MovieService {
         return movieInfoMapper.getAllMovieInfos();
     }
 
-    public MovieInfo getMovie(Long movieId) {
+    public MovieInfo getMovie(long movieId) {
         return movieInfoMapper.findMovie(movieId);
     }
 
@@ -35,7 +35,7 @@ public class MovieService {
         return reservationMapper.insertReservation(reservationInput);
     }
 
-    public List<SeatInfo> getAllSeats(Long movieId) {
+    public List<SeatInfo> getAllSeats(long movieId) {
         return reservationMapper.getAllSeats(movieId);
     }
 }

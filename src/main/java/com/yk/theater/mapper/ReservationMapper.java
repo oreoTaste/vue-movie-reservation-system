@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
-
 import java.util.List;
 
 @Mapper
@@ -42,8 +41,10 @@ public interface ReservationMapper {
 
 
     @Select("SELECT"
-            + " *"
+            + " seat_id as 'seatID'"
+            + ", seat_row as 'row'"
+            + ", seat_column as 'col'"
             + " FROM reservation_seat "
             + " WHERE schedule_id = #{movieId}")
-    List<SeatInfo> getAllSeats(Long movieId);
+    List<SeatInfo> getAllSeats(long movieId);
 }

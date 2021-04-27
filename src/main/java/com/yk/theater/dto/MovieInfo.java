@@ -17,5 +17,8 @@ public class MovieInfo {
     private int price;
     private int totalSeats;
     private int reservedSeats;
+    private int seatRow;
+    private int seatColumn;
+
 
 }

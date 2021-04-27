@@ -7,9 +7,11 @@ import com.yk.theater.service.MovieService;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class MovieInfoController {
     private MovieService movieService;
     private ReservationMapper reservationMapper;
@@ -31,13 +33,19 @@ public class MovieInfoController {
         return movieService.getAllMovies();
     }
 
+    @GetMapping("/movie/{movieId}")
+    public MovieInfo getMovieInfo(@PathVariable long movieId) {
+        System.out.println(movieId);
+        return movieService.getMovie(movieId);
+    }
+
     @GetMapping("/seat/{movieId}")
-    public List<SeatInfo> getSeatInfos(long movieId) {
+    public List<SeatInfo> getSeatInfos(@PathVariable long movieId) {
         return movieService.getAllSeats(movieId);
     }
 
     @GetMapping("/reservation/{movieId}")
-    public MovieInfo reservationForm(@PathVariable Long movieId) {
+    public MovieInfo reservationForm(@PathVariable long movieId) {
         return movieService.getMovie(movieId);
     }
 
@@ -49,6 +57,7 @@ public class MovieInfoController {
                                   @RequestParam("seatColumn") String seatColumn,
                                   Model model) {
 
+        System.out.println(scheduleId + ": " + tel+ ": " + people + ": " + seatRow+ ": " + seatColumn);
         MovieInfo movieInfo = movieService.getMovie(scheduleId);
         // 영화정보 받아오기
         if(movieInfo == null) {
@@ -64,7 +73,9 @@ public class MovieInfoController {
         String[] rows = seatRow.split(",");
         String[] columns = seatColumn.split(",");
         for (int i = 0; i < rows.length; i++) {
-            SeatInput seat = new SeatInput(scheduleId, Long.parseLong(rows[i]), Long.parseLong(columns[i]));
+            SeatInput seat = new SeatInput(scheduleId,
+                                    rows[i].getBytes(StandardCharsets.US_ASCII)[0] - 64,
+                                            Long.parseLong(columns[i]));
             movieService.insertSeat(seat);
 
             seats += seat.getSeatId();

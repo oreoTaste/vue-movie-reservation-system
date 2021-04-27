@@ -19,5 +19,5 @@ public interface MovieInfoMapper {
             " *" +
             " FROM movieInfo" +
             " WHERE scheduleId = #{movieId}")
-    MovieInfo findMovie(Long movieId);
+    MovieInfo findMovie(long movieId);
 }
